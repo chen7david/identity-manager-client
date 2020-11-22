@@ -11,7 +11,7 @@ import config from './../config'
 Vue.config.productionTip = false
 Vue.prototype.$config = config
 Vue.prototype.$http = http({
-  baseURL: config.api.media
+  baseURL: config.api.identity
 })
 
 new Vue({

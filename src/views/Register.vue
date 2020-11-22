@@ -39,7 +39,8 @@
                                 @click:append="show = !show"
                                 v-model="newuser.password"
                             ></v-text-field>
-                        </v-col>  
+                        </v-col>
+                        <v-btn :loading="isLoading" large elevation="0" @click="register(newuser)" block >register</v-btn>  
                     </v-col>
                 </v-card>
             </v-col>
@@ -48,11 +49,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: 'Register',
     data: () => ({
         newuser: {},
         show: false,
     }),
+    computed: {
+        ...mapGetters([
+            'validate',
+            'isLoading'
+        ])
+    },
+    methods: {
+        async register(){
+           const { data } = await this.$http.post('/register', this.newuser)
+           console.log({data})
+        }
+    }
 }
 </script>
