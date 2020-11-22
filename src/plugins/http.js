@@ -56,7 +56,6 @@ const responseErrorHandler = async (error) => {
     */
 
     /* HANDLING NOTIFICATION & VALIDATION ERRORS  */
-    dd(data)
     if(data.isCargo) data.details.state == 'validation' ?
         store.dispatch('setValidation', data.details) :
         store.dispatch('setSnackbar', data.details)
