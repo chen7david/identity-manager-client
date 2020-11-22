@@ -5,15 +5,26 @@
                 <v-card max-width="500">
                     <v-col>
                         <v-col>
-                        <v-text-field
-                            :error-messages="validate('username')"
-                            label="Username"
-                            name="username"
-                            outlined
-                            clearable
-                            hint="At least 1 character, no spaces"
-                            v-model="newuser.username"
-                        ></v-text-field>
+                            <v-text-field
+                                :error-messages="validate('phone')"
+                                label="Phone"
+                                name="phone"
+                                outlined
+                                clearable
+                                hint="At least 1 character, no spaces"
+                                v-model="newuser.phone"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
+                                :error-messages="validate('username')"
+                                label="Username"
+                                name="username"
+                                outlined
+                                clearable
+                                hint="At least 1 character, no spaces"
+                                v-model="newuser.username"
+                            ></v-text-field>
                         </v-col>
                         <v-col>
                             <v-text-field

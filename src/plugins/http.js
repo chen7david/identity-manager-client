@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '../store'
+// let isRefreshing = false
 const dd = (val) => console.log(val)
 
 /* REQUEST HANDLERS */
@@ -17,24 +18,46 @@ const requestErrorHandler = async (error) => {
 
 /* RESPONSE HANDLERS */
 const responseConfigHandler = async (response) => {
-    store.dispatch('setLoadingToFalse')
+    
     if(response.data.isCargo) response.data = response.data.payload
+    store.dispatch('setLoadingToFalse')
+    store.dispatch('setValidation', null)
     return response;
 }
 
 const responseErrorHandler = async (error) => {
-    const { response: { data } } = error
-    if (data) {
-        const { isCargo, details } = data
+    const { /* config,  */ response: { /* status, */ data } } = error
 
-        if(isCargo) details.state == 'validation' ?
-            store.dispatch('setValidation', details) :
-            store.dispatch('setSnackbar', details)
-
-        store.dispatch('setLoadingToFalse')
-        return Promise.reject(error.response.data)
+    /* REFRESHING ACCESSTOKEN */
+    /*
+    if(
+        isRefreshing && 
+        status == 401 && 
+        data.details.message.includes('expired access-token')
+    ){
+        try {
+            isRefreshing = true
+            const refreshToken = localStorage.getItem('refresh-token')
+            if(refreshToken != null) config.headers['x-refresh-token'] = `Bearer ${refreshToken}`
+            const response = await store.dispatch('refreshAccessToken')
+            if(response.status === 200 && !config.url.includes('/refresh')){
+                localStorage.setItem('access-token', data.accessToken)
+                return Promise.resolve(config)
+            } 
+        } catch (err) {
+            isRefreshing = false
+        }
     }
-    return Promise.reject(error.message)
+    */
+
+    /* HANDLING NOTIFICATION & VALIDATION ERRORS  */
+
+    if(data.isCargo) data.details.state == 'validation' ?
+        store.dispatch('setValidation', data.details) :
+        store.dispatch('setSnackbar', data.details)
+    store.dispatch('setLoadingToFalse')
+
+    return Promise.reject(error)
 }
 
 
