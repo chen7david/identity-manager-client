@@ -6,7 +6,7 @@
                     <v-col>
                         <v-col>
                         <v-text-field
-                            
+                            :error-messages="validate('username')"
                             label="Username"
                             name="username"
                             outlined
@@ -15,10 +15,9 @@
                             v-model="newuser.username"
                         ></v-text-field>
                         </v-col>
-
                         <v-col>
                             <v-text-field
-                                
+                                :error-messages="validate('email')"
                                 label="Email"
                                 name="email"
                                 outlined
@@ -29,7 +28,7 @@
                         </v-col>
                         <v-col>
                             <v-text-field
-                                
+                                :error-messages="validate('password')"
                                 label="Password"
                                 name="password"
                                 outlined
