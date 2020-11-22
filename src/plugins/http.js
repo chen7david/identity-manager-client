@@ -18,8 +18,13 @@ const requestErrorHandler = async (error) => {
 
 /* RESPONSE HANDLERS */
 const responseConfigHandler = async (response) => {
+    const { data } = response
     
-    if(response.data.isCargo) response.data = response.data.payload
+    if(data.isCargo) {
+        if(data.details) store.dispatch('setSnackbar', data.details)
+        response.data = response.data.payload
+    }
+    
     store.dispatch('setLoadingToFalse')
     store.dispatch('setValidation', null)
     return response;
@@ -51,7 +56,7 @@ const responseErrorHandler = async (error) => {
     */
 
     /* HANDLING NOTIFICATION & VALIDATION ERRORS  */
-
+    dd(data)
     if(data.isCargo) data.details.state == 'validation' ?
         store.dispatch('setValidation', data.details) :
         store.dispatch('setSnackbar', data.details)

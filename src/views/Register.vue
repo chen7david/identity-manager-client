@@ -72,7 +72,12 @@ import { mapGetters } from 'vuex'
 export default {
     name: 'Register',
     data: () => ({
-        newuser: {},
+        newuser: {
+            phone: '18500420909',
+            email: 'a@b.com',
+            password: '888888',
+            passwordConfirm: '888888',
+        },
         show: false,
     }),
     computed: {
