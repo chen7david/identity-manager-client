@@ -2,7 +2,14 @@
     <v-container fill-height fluid>
         <v-row justify="center">
             <v-col align="center" cols="12">
-                <v-card max-width="500">
+                <v-card max-width="400">
+                    <v-list-item three-line>
+                        <v-list-item-content>
+                            <div class="overline">register</div>
+                            <v-list-item-subtitle>create an account</v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
+                    
                     <v-col>
                         <v-col>
                             <v-text-field
@@ -11,22 +18,10 @@
                                 name="phone"
                                 outlined
                                 clearable
-                                hint="At least 1 character, no spaces"
+                                hint="please enter an 11 digit number"
                                 v-model="newuser.phone"
                             ></v-text-field>
-                        </v-col>
-                        <v-col>
-                            <v-text-field
-                                :error-messages="validate('username')"
-                                label="Username"
-                                name="username"
-                                outlined
-                                clearable
-                                hint="At least 1 character, no spaces"
-                                v-model="newuser.username"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col>
+                        
                             <v-text-field
                                 :error-messages="validate('email')"
                                 label="Email"
@@ -36,8 +31,7 @@
                                 hint="please enter a valid email"
                                 v-model="newuser.email"
                             ></v-text-field>
-                        </v-col>
-                        <v-col>
+                        
                             <v-text-field
                                 :error-messages="validate('password')"
                                 label="Password"
@@ -49,6 +43,20 @@
                                 hint="At least 6 characters"
                                 @click:append="show = !show"
                                 v-model="newuser.password"
+                            ></v-text-field>
+                        
+                            <v-text-field
+                            v-if="newuser.password"
+                                :error-messages="validate('passwordConfirm')"
+                                label="Password Confirm"
+                                name="passwordConfirm"
+                                outlined
+                                clearable
+                                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="show ? 'text' : 'password'"
+                                hint="Repeat the password you entered above"
+                                @click:append="show = !show"
+                                v-model="newuser.passwordConfirm"
                             ></v-text-field>
                         </v-col>
                         <v-btn :loading="isLoading" large elevation="0" @click="register(newuser)" block >register</v-btn>  
