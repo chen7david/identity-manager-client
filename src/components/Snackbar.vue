@@ -5,15 +5,16 @@
       :multi-line="multiLine"
       :color="snackbar.color || `success`"
       :timeout="snackbar.timeout || 6000"
+      class="text--center"
     >
-      {{ snackbar.text }}
-      <v-btn
-        dark
-        text
-        @click="snackbar.show = false"
-      >
-        Close
-      </v-btn>
+      {{ snackbar.message }}
+      
+      <template v-slot:action>
+        <v-btn text @click="snackbar.show = false">
+          Close
+        </v-btn>
+      </template>
+      
     </v-snackbar>
   </div>
 </template>

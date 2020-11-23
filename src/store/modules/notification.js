@@ -18,7 +18,7 @@ export default {
         SET_VALIDATION: (state, details) => state.validation = details,
         SET_SNACKBAR: (state, details) => state.snackbar = {
           show: true,
-          text: details.message, 
+          message: details.message, 
           color: details.state || 'dark',
           timeout: details.timeout
         },

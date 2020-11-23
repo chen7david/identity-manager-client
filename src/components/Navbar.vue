@@ -87,7 +87,8 @@ export default {
             localStorage.removeItem('access-token')
             localStorage.removeItem('refresh-token')
             localStorage.removeItem('user') 
-            this.$setUserTo({})
+            this.$setUserTo(null)
+            this.$router.push('/login')
         }
     }
 }
