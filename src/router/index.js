@@ -39,9 +39,9 @@ router.beforeEach((to, from, next) => {
   
   let auth = store._vm.isAuth
   
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if(to.matched.some(record => record.meta.requiresAuth)){
 
-    if (!auth) {
+    if(!auth){
       const notification = {
         message: 'please login before accessing this route!',
         state: 'warning'
@@ -56,7 +56,6 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    // next({path: from.fullPath})
     next()
   }
 })
