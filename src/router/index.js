@@ -42,14 +42,16 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
 
     if (!auth) {
-      store.dispatch('setSnackbar', {
+      const notification = {
         message: 'please login before accessing this route!',
         state: 'warning'
-      })
-      next({
+      }
+      const routeConfig = {
         path: '/login',
         query: { redirect: to.fullPath }
-      })
+      }
+      store.dispatch('setSnackbar', notification)
+      next(routeConfig)
     } else {
       next()
     }
