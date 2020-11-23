@@ -27,6 +27,12 @@ const routes = [
     meta: { requiresAuth: true },
     component: () => import('../views/Account.vue')
   },
+  {
+    path: '/users',
+    name: 'Users',
+    meta: { requiresAuth: true },
+    component: () => import('../views/Users.vue')
+  },
 ]
 
 const router = new VueRouter({
