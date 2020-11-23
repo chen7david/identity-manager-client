@@ -11,7 +11,7 @@
                 </v-avatar>
                 <v-list-item three-line class="text-center">
                     <v-list-item-content>
-                        <v-list-item-title>David M.Chen</v-list-item-title>
+                        <v-list-item-title>{{$user.email || $user.phone}}</v-list-item-title>
                         <v-list-item-subtitle>Teacher</v-list-item-subtitle>
                         <v-list-item-subtitle>
                             <v-chip class="font-weight-bold" color="success">$1005</v-chip>
@@ -63,7 +63,8 @@ export default {
     }),
     computed:{
         ...mapGetters([
-            'links'
+            'links',
+            '$user'
         ])
     }, 
     watch: {

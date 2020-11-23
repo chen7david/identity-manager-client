@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'Login',
     data: () => ({
@@ -60,9 +60,15 @@ export default {
         ])
     },
     methods: {
+        ...mapActions([
+            '$setUserTo'
+        ]),
         async login(){
            const { data } = await this.$http.post('/login', this.user)
-           console.log({data})
+           localStorage.setItem('access-token', data.accessToken)
+           localStorage.setItem('refresh-token', data.refreshToken)
+           localStorage.setItem('user', JSON.stringify(data.user))
+           this.$setUserTo(data.user)
         }
     }
 }

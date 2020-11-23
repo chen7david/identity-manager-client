@@ -7,6 +7,8 @@ const dd = (val) => console.log(val)
 const requestConfigHandler = async (config) => {
     
     dd({url:config.url})
+    let accessToken = localStorage.getItem('access-token')
+    if(accessToken != null) config.headers.Authorization = `Bearer ${accessToken}`
     store.dispatch('setLoadingToTrue')
     return config
 }
