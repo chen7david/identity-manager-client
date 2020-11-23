@@ -56,6 +56,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
+    // next({path: from.fullPath})
     next()
   }
 })

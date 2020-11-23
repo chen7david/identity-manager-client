@@ -48,11 +48,11 @@
             <v-app-bar-nav-icon v-show="isAuth" @click="drawer = !drawer"/>
             <v-spacer></v-spacer>
             <div v-if="!isAuth">
-                <v-btn tile router to="/login">Login</v-btn>
-                <v-btn tile router to="/register">Register</v-btn>
+                <v-btn text tile router to="/login">Login</v-btn>
+                <v-btn text tile router to="/register">Register</v-btn>
             </div>
             <div v-else>
-                <v-btn @click="logout" tile>Logout</v-btn>
+                <v-btn @click="logout" text tile>Logout</v-btn>
             </div>
         </v-app-bar>
     </nav>
