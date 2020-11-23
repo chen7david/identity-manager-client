@@ -45,7 +45,7 @@
             app
             dark
         >
-            <v-app-bar-nav-icon @click="drawer = !drawer"/>
+            <v-app-bar-nav-icon v-show="isAuth" @click="drawer = !drawer"/>
             <v-spacer></v-spacer>
             <div v-if="!isAuth">
                 <v-btn tile router to="/login">Login</v-btn>
@@ -64,7 +64,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'Navbar',
     data: () => ({
-        drawer: true,
+        drawer: false,
         dark: true,
     }),
     computed:{
@@ -87,6 +87,7 @@ export default {
             localStorage.removeItem('access-token')
             localStorage.removeItem('refresh-token')
             localStorage.removeItem('user') 
+            this.drawer = false
             this.$setUserTo(null)
             this.$router.push('/login')
         }
