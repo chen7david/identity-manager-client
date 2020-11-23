@@ -7,14 +7,15 @@
         >       
             <v-row justify="center" class="my-5">
                 <v-avatar size="150px">
-                    <img src="https://www.iconfinder.com/data/icons/business-avatar-1/512/8_avatar-512.png" alt="">
+                    <img src="@/../public/male.png" alt="">
+                    <!-- <img src="@/../public/female.png" alt=""> -->
                 </v-avatar>
                 <v-list-item three-line class="text-center">
                     <v-list-item-content>
-                        <v-list-item-title>{{$user.email || $user.phone}}</v-list-item-title>
-                        <v-list-item-subtitle>Teacher</v-list-item-subtitle>
+                        <v-list-item-title>{{$user.email || 'unknown user'}}</v-list-item-title>
+                        <v-list-item-subtitle class="my-2">'unknown role'</v-list-item-subtitle>
                         <v-list-item-subtitle>
-                            <v-chip class="font-weight-bold" color="success">$1005</v-chip>
+                            <v-chip class="font-weight-bold" color="success">$0</v-chip>
                         </v-list-item-subtitle>
                     </v-list-item-content>
                 </v-list-item>
@@ -46,14 +47,19 @@
         >
             <v-app-bar-nav-icon @click="drawer = !drawer"/>
             <v-spacer></v-spacer>
-            <v-btn tile router to="/login">Login</v-btn>
-            <v-btn tile router to="/register">Register</v-btn>
+            <div v-if="!isAuth">
+                <v-btn tile router to="/login">Login</v-btn>
+                <v-btn tile router to="/register">Register</v-btn>
+            </div>
+            <div v-else>
+                <v-btn @click="logout" tile>Logout</v-btn>
+            </div>
         </v-app-bar>
     </nav>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'Navbar',
@@ -64,13 +70,25 @@ export default {
     computed:{
         ...mapGetters([
             'links',
-            '$user'
+            '$user',
+            'isAuth'
         ])
     }, 
     watch: {
       dark(dark){
         this.$vuetify.theme.dark = dark
       }
+    },
+    methods: {
+        ...mapActions([
+            '$setUserTo'
+        ]),
+        logout(){
+            localStorage.removeItem('access-token')
+            localStorage.removeItem('refresh-token')
+            localStorage.removeItem('user') 
+            this.$setUserTo({})
+        }
     }
 }
 </script>

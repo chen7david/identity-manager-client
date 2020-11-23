@@ -19,14 +19,5 @@ export default {
         setLoadingToTrue: ({commit}) => commit('SET_LOADING', true),
         setLoadingToFalse: ({commit}) => commit('SET_LOADING', false),
         $setUserTo: ({commit}, user) => commit('$SET_USER', user),
-
-        async login({commit}, authInfo){
-            const { data } = await this.$http.post('/login', authInfo)
-            localStorage.setItem('access-token', data.accessToken)
-            localStorage.setItem('refresh-token', data.refreshToken)
-            localStorage.setItem('user', JSON.stringify(data.user))
-            commit('$SET_USER', data.user)
-            // router.push(redirect || '/profile')
-        },
     },
 }
