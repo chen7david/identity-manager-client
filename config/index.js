@@ -1,7 +1,7 @@
 
 export default {
     api: {
-        identity: 'http://localhost:3000',
+        identity: 'http://192.168.50.128:3000',
     },
     img: {
         avatar: {
