@@ -6,6 +6,8 @@
                     <v-col v-for="user of users" :key="user.id">
                         <v-card width="300px">
                             {{user.email}}
+                            <hr>
+                            {{user.phone}}
                         </v-card>
                     </v-col>
                 </v-row>
