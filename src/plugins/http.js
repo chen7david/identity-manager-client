@@ -53,6 +53,7 @@ async function responseErrorHandler (error){
             } 
         } catch (err) {
             isRefreshing = false
+            store.dispatch('logout')
         }
     }
 
