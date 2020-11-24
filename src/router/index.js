@@ -33,6 +33,12 @@ const routes = [
     meta: { requiresAuth: true },
     component: () => import('../views/Users.vue')
   },
+  {
+    path: '/devices',
+    name: 'Devices',
+    meta: { requiresAuth: true },
+    component: () => import('../views/Devices.vue')
+  },
 ]
 
 const router = new VueRouter({

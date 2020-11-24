@@ -15,6 +15,11 @@ export default {
                 to: '/users'
             },
             {
+                name: 'Devices',
+                icon: 'mdi-monitor-multiple',
+                to: '/devices'
+            },
+            {
                 name: 'Roles',
                 icon: 'mdi-lock',
                 to: '/roles'

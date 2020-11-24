@@ -23,7 +23,11 @@ export default {
         async refreshToken(){ return await this._vm.$http.get('/refresh') },
         async recall(config){ return await this._vm.$http(config) },
         async logout({commit}){
-            await store._vm.$http.get('logout')
+            try {
+                await store._vm.$http.get('logout')
+            } catch (err) {
+                console.log(err)
+            }
             localStorage.removeItem('access-token')
             localStorage.removeItem('refresh-token')
             localStorage.removeItem('user') 
