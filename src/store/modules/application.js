@@ -1,5 +1,5 @@
 import router from './../../router'
-
+import store from './../../store'
 export default {
     
     state: {
@@ -22,7 +22,8 @@ export default {
         $setUserTo: ({commit}, user) => commit('$SET_USER', user),
         async refreshToken(){ return await this._vm.$http.get('/refresh') },
         async recall(config){ return await this._vm.$http(config) },
-        logout({commit}){
+        async logout({commit}){
+            await store._vm.$http.get('logout')
             localStorage.removeItem('access-token')
             localStorage.removeItem('refresh-token')
             localStorage.removeItem('user') 
