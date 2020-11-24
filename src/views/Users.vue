@@ -10,7 +10,7 @@
                             {{user.phone}}
                         </v-card>
                     </v-col>
-                </v-row>
+                </v-row> 
             </v-col>
         </v-row>
   </v-container>

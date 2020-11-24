@@ -14,11 +14,13 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
+    meta: { rejectsAuth: true },
     component: () => import('../views/Register.vue')
   },
   {
     path: '/login',
     name: 'Login',
+    meta: { rejectsAuth: true },
     component: () => import('../views/Login.vue')
   },
   {
@@ -50,7 +52,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   
   let auth = store._vm.isAuth
-  
+  console.log({from, to})
   if(to.matched.some(record => record.meta.requiresAuth)){
 
     if(!auth){
@@ -67,8 +69,21 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
-  } else {
-    next()
+  } else if(to.matched.some(record => record.meta.rejectsAuth)) {
+      if(auth){
+        const notification = {
+          message: 'please logout before accessing this route!',
+          state: 'warning'
+        }
+        const routeConfig = {
+          path: from.fullPath,
+          query: { redirect: to.fullPath }
+        }
+        store.dispatch('setSnackbar', notification)
+        next(routeConfig)
+      } else {
+        next()
+      }
   }
 })
 
