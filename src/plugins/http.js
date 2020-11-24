@@ -24,7 +24,7 @@ const requestErrorHandler = async (error) => {
 /* RESPONSE HANDLERS */
 const responseConfigHandler = async (response) => {
     const { data } = response
-    
+    isRefreshing = false
     if(data.isCargo) {
         if(data.details) store.dispatch('setSnackbar', data.details)
         response.data = response.data.payload
@@ -37,24 +37,22 @@ const responseConfigHandler = async (response) => {
 
 async function responseErrorHandler (error){
     const { config,  response: { status, data } } = error
+
     /* REFRESHING ACCESSTOKEN */
     if(
         !isRefreshing && 
         status == 401 && 
         data.details.message.includes('expired access-token')
     ){
-        console.log('noooooo!')
         try {
             isRefreshing = true
             const response = await store.dispatch('refreshToken')
-            console.log({response})
             if(response.status === 200 && !config.url.includes('/refresh')){
                 localStorage.setItem('access-token', response.data.accessToken)
                 return Promise.resolve(store._vm.$http(config))
             } 
         } catch (err) {
             isRefreshing = false
-            store.dispatch('logout')
         }
     }
 
