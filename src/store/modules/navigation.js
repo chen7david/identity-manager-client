@@ -2,6 +2,7 @@
 export default {
     
     state: {
+        drawer: false,
         links:[
             {
                 name: 'Account',

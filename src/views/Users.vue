@@ -1,10 +1,14 @@
 <template>
-    <v-container fill-height fluid>
-        <v-row justify="center">
-            <v-col align="center" cols="12">
-                <v-card width="300px" v-for="user of users" :key="user.id">
-                    {{user}}
-                </v-card>
+    <v-container fluid>
+        <v-row fill-height>
+            <v-col cols="12">
+                <v-row fill-height justify="space-around">
+                    <v-col v-for="user of users" :key="user.id">
+                        <v-card width="300px">
+                            {{user.email}}
+                        </v-card>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
   </v-container>

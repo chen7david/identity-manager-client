@@ -81,16 +81,9 @@ export default {
     },
     methods: {
         ...mapActions([
-            '$setUserTo'
+            'logout'
         ]),
-        logout(){
-            localStorage.removeItem('access-token')
-            localStorage.removeItem('refresh-token')
-            localStorage.removeItem('user') 
-            this.drawer = false
-            this.$setUserTo(null)
-            this.$router.push('/login')
-        }
+
     }
 }
 </script>

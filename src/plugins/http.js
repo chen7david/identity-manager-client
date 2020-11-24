@@ -1,14 +1,17 @@
 import axios from 'axios'
 import store from '../store'
-// let isRefreshing = false
+let isRefreshing = false
 const dd = (val) => console.log(val)
 
 /* REQUEST HANDLERS */
 const requestConfigHandler = async (config) => {
-    
     dd({url:config.url})
     let accessToken = localStorage.getItem('access-token')
     if(accessToken != null) config.headers.Authorization = `Bearer ${accessToken}`
+    if(isRefreshing) {
+        let refreshToken = localStorage.getItem('refresh-token')
+        if(refreshToken != null) config.headers['x-refresh-token'] = `Bearer ${refreshToken}` 
+    }
     store.dispatch('setLoadingToTrue')
     return config
 }
@@ -32,30 +35,28 @@ const responseConfigHandler = async (response) => {
     return response;
 }
 
-const responseErrorHandler = async (error) => {
-    const { /* config,  */ response: { /* status, */ data } } = error
-
+async function responseErrorHandler (error){
+    const { config,  response: { status, data } } = error
     /* REFRESHING ACCESSTOKEN */
-    /*
     if(
-        isRefreshing && 
+        !isRefreshing && 
         status == 401 && 
         data.details.message.includes('expired access-token')
     ){
+        console.log('noooooo!')
         try {
             isRefreshing = true
-            const refreshToken = localStorage.getItem('refresh-token')
-            if(refreshToken != null) config.headers['x-refresh-token'] = `Bearer ${refreshToken}`
-            const response = await store.dispatch('refreshAccessToken')
+            const response = await store.dispatch('refreshToken')
+            console.log({response})
             if(response.status === 200 && !config.url.includes('/refresh')){
-                localStorage.setItem('access-token', data.accessToken)
-                return Promise.resolve(config)
+                localStorage.setItem('access-token', response.data.accessToken)
+                return Promise.resolve(store._vm.$http(config))
             } 
         } catch (err) {
             isRefreshing = false
+            store.dispatch('logout')
         }
     }
-    */
 
     /* HANDLING NOTIFICATION & VALIDATION ERRORS  */
     if(data.isCargo) data.details.state == 'validation' ?

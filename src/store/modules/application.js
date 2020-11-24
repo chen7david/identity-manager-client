@@ -1,3 +1,4 @@
+import router from './../../router'
 
 export default {
     
@@ -19,5 +20,14 @@ export default {
         setLoadingToTrue: ({commit}) => commit('SET_LOADING', true),
         setLoadingToFalse: ({commit}) => commit('SET_LOADING', false),
         $setUserTo: ({commit}, user) => commit('$SET_USER', user),
+        async refreshToken(){ return await this._vm.$http.get('/refresh') },
+        async recall(config){ return await this._vm.$http(config) },
+        logout({commit}){
+            localStorage.removeItem('access-token')
+            localStorage.removeItem('refresh-token')
+            localStorage.removeItem('user') 
+            commit('$SET_USER', null)
+            router.push('/login')
+        }
     },
 }
