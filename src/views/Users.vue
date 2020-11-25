@@ -3,10 +3,10 @@
         <v-row fill-height>
             <v-col cols="12">
                 <v-row fill-height justify="space-around">
-                    <!-- <v-col v-for="user of users" :key="user.id">
+                    <v-col v-for="user of users" :key="user.id">
                         <UserCard :user="user"/>
-                    </v-col> -->
-                    <v-data-table
+                    </v-col>
+                    <!-- <v-data-table
                         :headers="headers"
                         :items="users"
                         class="elevation-1"
@@ -30,7 +30,7 @@
                                 <td class="text-xs-right">{{ props.item.iron }}</td>
                              </tr>
                         </template>
-                    </v-data-table>
+                    </v-data-table> -->
                 </v-row> 
             </v-col>
         </v-row>
@@ -38,12 +38,12 @@
 </template>
 
 <script>
-// import UserCard from './../components/UserCard'
+import UserCard from './../components/UserCard'
 
 export default {
     name: 'Account',
     components: {
-        // UserCard
+        UserCard
     },
     data: () => ({
         headers: [

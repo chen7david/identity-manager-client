@@ -73,8 +73,8 @@ export default {
     name: 'Register',
     data: () => ({
         newuser: {
-            phone: '18500420909',
-            email: 'a@b.com',
+            phone: '15643638289',
+            email: 'max@me.com',
             password: '888888',
             passwordConfirm: '888888',
         },
