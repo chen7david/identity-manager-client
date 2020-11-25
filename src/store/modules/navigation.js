@@ -17,12 +17,12 @@ export default {
                 to: '/shows',
                 roles: []
             },
-            {
-                name: 'Account',
-                icon: 'mdi-account',
-                to: '/account',
-                roles: []
-            },
+            // {
+            //     name: 'Account',
+            //     icon: 'mdi-account',
+            //     to: '/account',
+            //     roles: []
+            // },
             {
                 name: 'Users',
                 icon: 'mdi-account-multiple',

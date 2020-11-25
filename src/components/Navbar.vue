@@ -47,6 +47,20 @@
         >
             <v-app-bar-nav-icon v-show="isAuth" @click="drawer = !drawer"/>
             <v-spacer></v-spacer>
+            <v-text-field
+                v-if="isSearchable"
+                class="mt-6 mx-3 shrink"
+                light
+                solo
+                filled
+                rounded
+                append-inner-icon="mdi-magnify"
+                placeholder="Search..."
+                dense
+                clearable
+                v-model="phrase"
+            >
+            </v-text-field>
             <div v-if="!isAuth">
                 <v-btn text tile router to="/login">Login</v-btn>
                 <v-btn text tile router to="/register">Register</v-btn>
@@ -66,6 +80,9 @@ export default {
     data: () => ({
         drawer: false,
         dark: true,
+        page: null,
+        searchable: ['movies', 'shows'],
+        phrase: '',
     }),
     computed:{
         ...mapGetters([
@@ -76,6 +93,9 @@ export default {
         role(){ return this.$user.roles && this.$user.roles[0] && this.$user.roles[0].name },
         allowedLinks(){
             return this.links.filter(l => this.hasAnyRole(...l.roles))
+        },
+        isSearchable(){
+            return this.searchable.includes(this.page)
         }
     }, 
     watch: {
@@ -84,6 +104,13 @@ export default {
       },
       isAuth(boolean){
           this.drawer = boolean
+      },
+      phrase(phrase){
+          this.$root.$emit(`search-${this.page}`,phrase)
+      },
+      $route(to){
+        this.page = to.name.toLowerCase()
+        this.phrase = ''
       }
     },
     methods: {
@@ -95,6 +122,9 @@ export default {
             return this.$user.roles.find(r => names.includes(r.name)) != null
         }
 
+    },
+    mounted(){
+        this.page = this.$route.name.toLowerCase()
     }
 }
 </script>
