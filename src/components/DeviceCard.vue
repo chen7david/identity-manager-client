@@ -1,6 +1,6 @@
 <template>
   <v-card width="400" height="100" :color="bgColor" class="white--text" tile>
-    <v-app-bar flat color="rgba(0, 0, 0, 0)">
+    <v-app-bar flat color="rgba(0, 0, 0, 0)" class="ma-0">
             <v-toolbar-title class="title white--text text-capitalize">
               {{device.browser.name}}
             </v-toolbar-title>
@@ -10,8 +10,8 @@
             <v-btn color="white" icon v-if="isActive">
               <v-icon @click="revoke" small>mdi-close</v-icon>
             </v-btn>
-          </v-app-bar>
-    <v-card-subtitle>
+    </v-app-bar>
+    <v-card-subtitle class="ma-0">
       {{device.platform}} {{device.os.name}} {{device.os.version.info}} | {{item.call_count}} | {{fromNow}}
     </v-card-subtitle>
   </v-card>
