@@ -4,10 +4,7 @@
             <v-col cols="12">
                 <v-row fill-height justify="space-around">
                     <v-col v-for="token of tokens" :key="token.id">
-                        <v-card width="300px">
-                            {{token.tokenId}}
-                            {{token.useragent}}
-                        </v-card>
+                        <DeviceCard :item="token" />
                     </v-col>
                 </v-row>
             </v-col>
@@ -16,9 +13,13 @@
 </template>
 
 <script>
+import DeviceCard from './../components/DeviceCard'
 
 export default {
     name: 'Devices',
+    components: {
+        DeviceCard
+    },
     data: () => ({
         tokens: [],
     }),
@@ -29,7 +30,7 @@ export default {
            const { data } = await this.$http.get('/tokens')
            console.log({data})
            this.tokens = data
-        }
+        },
     },
     async mounted(){
         await this.fetchTokens()

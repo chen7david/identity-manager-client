@@ -27,7 +27,7 @@
             ></v-switch>
             </v-row>
             
-            <v-list>
+            <v-list v-if="isAuth">
                 <v-list-item
                     v-for="link of allowedLinks"
                     :key="link.to"
