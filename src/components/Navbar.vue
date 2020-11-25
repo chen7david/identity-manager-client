@@ -123,8 +123,8 @@ export default {
         }
 
     },
-    mounted(){
-        this.page = this.$route.name.toLowerCase()
-    }
+    // mounted(){
+    //     this.page = this.$route.name.toLowerCase()
+    // }
 }
 </script>
