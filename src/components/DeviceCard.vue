@@ -1,23 +1,20 @@
 <template>
-  <v-card color="blue-grey darken-2" class="white--text" tile>
-    <v-card-title title>
-      <div>
-        <span>{{device.browser.name}}</span>
-        <br/>
-        <span>{{device.platform}}</span>
-        <br/>
-        <span>{{device.os.name}}</span>
-        <br/>
-        <span>{{device.os.version.info}}</span>
-        <span>{{device.os.version.info}}</span>
-        <br/>
-        {{fromNow}}
-        <br/>
-      </div>
-    </v-card-title>
-    <v-card-actions>
-      <v-btn flat dark>Listen now</v-btn>
-    </v-card-actions>
+  <v-card width="400" height="100" :color="bgColor" class="white--text" tile>
+    <v-app-bar flat color="rgba(0, 0, 0, 0)">
+
+            <v-toolbar-title class="title white--text text-capitalize">
+              {{device.browser.name}}
+            </v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-btn color="white" icon v-if="isActive">
+              <v-icon @click="revoke" small>mdi-close</v-icon>
+            </v-btn>
+          </v-app-bar>
+    <v-card-subtitle>
+      {{device.platform}} {{device.os.name}} {{device.os.version.info}} | {{item.call_count}} | {{fromNow}}
+    </v-card-subtitle>
   </v-card>
 </template>
 
@@ -39,9 +36,19 @@ export default {
       },
       fromNow(){
         return moment(this.item.updated_at).fromNow()
+      },
+      bgColor(){
+          if(this.item.revoked) return '#E65100'
+          return this.item.active ? '#303F9F' : '#263238'
+      },
+      isActive(){
+        return this.item.active && !this.item.revoked
       }
     },
     methods: {
+      async revoke(){
+          this.$http.delete(`/tokens/${this.item.tokenId}/revoke`)
+      }
     },
 }
 </script>

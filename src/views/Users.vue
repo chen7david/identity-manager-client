@@ -10,7 +10,7 @@
                         :headers="headers"
                         :items="users"
                         class="elevation-1"
-                        select-all
+                        
                         item-key="name"
                     >
                         <template v-slot:items="props">
