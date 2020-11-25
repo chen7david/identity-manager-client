@@ -114,16 +114,16 @@ export default {
       this.isLoading = false
     },
     async importMovies(){
-      await this.$http('/movies-import')
+      await this.$media('/movies-import')
     },
     async graphMovies(){
-      await this.$http('/movies-graph')
+      await this.$media('/movies-graph')
     },
     async importShows(){
-      await this.$http('/shows-import')
+      await this.$media('/shows-import')
     },
     async graphShows(){
-      await this.$http('/shows-graph')
+      await this.$media('/shows-graph')
     },
   }
 };

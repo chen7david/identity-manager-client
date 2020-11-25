@@ -44,25 +44,36 @@ const routes = [
   {
     path: '/movies',
     name: 'Movies',
+    meta: { requiresAuth: true },
     component: () => import('../views/Movies.vue')
   },
   {
     path: '/movie/:id',
     name: 'Movie',
+    meta: { requiresAuth: true },
     component: () => import('../views/Movie.vue'),
     props: true
   },
   {
     path: '/shows',
     name: 'Shows',
+    meta: { requiresAuth: true },
     component: () => import('../views/Shows.vue'),
   },
   {
     path: '/show/:id',
     name: 'Show',
+    meta: { requiresAuth: true },
     component: () => import('../views/Show.vue'),
     props: true
   },
+  {
+    path: '/documentation',
+    name: 'Documentation',
+    meta: { requiresAuth: true },
+    component: () => import('../views/Documentation.vue')
+  },
+  
 ]
 
 const router = new VueRouter({
