@@ -1,7 +1,6 @@
 <template>
   <v-card width="400" height="100" :color="bgColor" class="white--text" tile>
     <v-app-bar flat color="rgba(0, 0, 0, 0)">
-
             <v-toolbar-title class="title white--text text-capitalize">
               {{device.browser.name}}
             </v-toolbar-title>
