@@ -48,7 +48,7 @@ export default {
     name: 'Login',
     data: () => ({
         user: {
-            phone: '18500420909',
+            phone: '18500290402',
             password: '888888',
         },
         show: false,

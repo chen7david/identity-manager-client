@@ -13,7 +13,7 @@
                 <v-list-item three-line class="text-center">
                     <v-list-item-content>
                         <v-list-item-title>{{$user.email || 'unknown user'}}</v-list-item-title>
-                        <v-list-item-subtitle class="my-2">'unknown role'</v-list-item-subtitle>
+                        <v-list-item-subtitle class="my-2">{{role}}</v-list-item-subtitle>
                         <v-list-item-subtitle>
                             <v-chip class="font-weight-bold" color="success">$0</v-chip>
                         </v-list-item-subtitle>
@@ -29,12 +29,12 @@
             
             <v-list>
                 <v-list-item
-                    v-for="link of links"
+                    v-for="link of allowedLinks"
                     :key="link.to"
                     router
                     :to="link.to"
                 >
-                    <v-list-item-action>
+                    <v-list-item-action> 
                         <v-icon>{{link.icon}}</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>{{link.name}}</v-list-item-content>
@@ -72,7 +72,11 @@ export default {
             'links',
             '$user',
             'isAuth'
-        ])
+        ]),
+        role(){ return this.$user.roles && this.$user.roles[0] && this.$user.roles[0].name },
+        allowedLinks(){
+            return this.links.filter(l => this.hasAnyRole(...l.roles))
+        }
     }, 
     watch: {
       dark(dark){
@@ -87,6 +91,10 @@ export default {
         ...mapActions([
             'logout'
         ]),
+        hasAnyRole(...names){
+            if(names.length < 1) return true
+            return this.$user.roles.find(r => names.includes(r.name)) != null
+        }
 
     }
 }
