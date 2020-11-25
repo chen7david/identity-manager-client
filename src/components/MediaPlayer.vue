@@ -28,8 +28,13 @@
                 default
             >
         </video>
-        <h1 v-else>This video was not found!</h1>
-
+        <v-sheet
+            v-else
+            :width="width" 
+            :height="height"
+        >   
+            <h1 >This video was not found!</h1>
+        </v-sheet>
     </v-sheet>
 </template>
 

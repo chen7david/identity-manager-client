@@ -78,6 +78,7 @@ export default {
   },
   created(){
     window.addEventListener('resize',this.setScreen)
+    this.setScreen()
   }
 };
 </script>

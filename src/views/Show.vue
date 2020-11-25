@@ -71,6 +71,8 @@ export default {
       this.windowWidth = this.$vuetify.breakpoint.width
     },
     async setEpisode(ep){
+      const user = await this.$http.get('/me')
+      console.log({user})
       this.episode = ep
       this.$refs.media.$refs.player
       // await video.play()
@@ -82,6 +84,7 @@ export default {
   },
   created(){
     window.addEventListener('resize',this.setScreen)
+    this.setScreen()
   }
 };
 </script>
