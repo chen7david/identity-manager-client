@@ -83,7 +83,6 @@ export default {
         this.$vuetify.theme.dark = dark
       },
       isAuth(boolean){
-          console.log({boolean})
           this.drawer = boolean
       }
     },
