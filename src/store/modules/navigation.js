@@ -20,7 +20,7 @@ export default {
                 name: 'Devices',
                 icon: 'mdi-monitor-multiple',
                 to: '/devices',
-                roles: ['admin']
+                roles: []
             },
             {
                 name: 'Roles',
