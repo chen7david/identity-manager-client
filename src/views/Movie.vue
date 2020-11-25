@@ -62,7 +62,9 @@ export default {
   },
   methods: {
     async getMovie(){
+      const user = await this.$http.get('/me')
       const  { data }  = await this.$media.get(`/movies/${this.id}`)
+      console.log({user})
       this.item = data
     },
 

@@ -60,6 +60,8 @@ export default {
       this.isLoading = false
     },
     async getMovies(){
+      const user = await this.$http.get('/me')
+      console.log({user})
       const { data } = await this.$media.get('/movies')
       function compare(a,b){
         const dateA = new Date(a.release_date)

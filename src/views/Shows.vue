@@ -61,6 +61,8 @@ export default {
       this.isLoading = false
     },
     async getShows(){
+      const user = await this.$http.get('/me')
+      console.log({user})
       const { data } = await this.$media.get('/shows')
       function compare(a,b){
         const dateA = new Date(a.first_air_date)

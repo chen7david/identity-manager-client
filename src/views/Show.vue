@@ -58,6 +58,8 @@ export default {
   },
   methods: {
     async getShow(){
+      const user = await this.$http.get('/me')
+      console.log({user})
       const  { data }  = await this.$media.get(`/shows/${this.id}`)
       const seasons = data.seasons.filter(s => s.episodes.length > 0)
       this.episode = seasons[0].episodes[0]
