@@ -69,6 +69,7 @@ export default {
            localStorage.setItem('refresh-token', data.refreshToken)
            localStorage.setItem('user', JSON.stringify(data.user))
            this.$setUserTo(data.user)
+           this.$router.push('/movies')
         }
     }
 }
