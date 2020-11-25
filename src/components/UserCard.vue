@@ -1,6 +1,6 @@
 <template>
-  <v-card width="400" height="100" color="#263238" class="white--text" tile>
-    <v-app-bar flat color="rgba(0, 0, 0, 0)" class="ma-0">
+  <v-card width="400" color="#286fa8" class="white--text" tile>
+    <v-app-bar flat color="rgba(0, 0, 0, 0)">
             <v-toolbar-title class="title white--text text-capitalize">
               {{item.email}}
             </v-toolbar-title>

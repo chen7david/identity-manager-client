@@ -5,6 +5,19 @@ export default {
         drawer: false,
         links:[
             {
+                name: 'Movies',
+                icon: 'mdi-movie',
+                to: '/movies',
+                roles: []
+                
+            },
+            {
+                name: 'Shows',
+                icon: 'mdi-monitor',
+                to: '/shows',
+                roles: []
+            },
+            {
                 name: 'Account',
                 icon: 'mdi-account',
                 to: '/account',

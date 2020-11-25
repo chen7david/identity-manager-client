@@ -13,6 +13,9 @@ Vue.prototype.$config = config
 Vue.prototype.$http = http({
   baseURL: config.api.identity
 })
+Vue.prototype.$media = http({
+  baseURL: config.api.media
+})
 
 new Vue({
   router,
